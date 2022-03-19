@@ -1,0 +1,160 @@
+
+<div class="container-fluid">
+  <div class="row mt-3">
+    <div class="col -8">
+      <div class="album py-5 bg-light">
+        <div class="container">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <tr *ngFor="let miCarro of arregloCarro; let indice = index" (click)="seleccionarCarro(miCarro)"
+              [class.table-primary]="miCarro == carroSeleccionado">
+              <div class="col">
+                <div class="card shadow-sm " >
+                  <img [src]="miCarro.fotoBase64"  style="width: 95px; height: 95px; margin-left: auto; margin-right: auto; " alt="ayyyyyyyy"
+                onerror="this.src='../assets/img/notfound.png'" />
+
+                  <div class="card-body">
+                    <small class="text-muted"> {{ miCarro.modelo }}</small>
+
+                    <p class="card-text">
+                      {{ miCarro.marca }}
+                      <br/>
+                      {{ miCarro.placa }}
+                      <br/>
+                      {{miCarro.propietario.nombre}}
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success">
+                          Editar
+                        </button>
+                      </div>
+
+                      <button type="button" class="btn btn-danger" (click)="btnAbrirModal(ventanaEliminar, miCarro)"
+                        red-trash>
+                        Eliminar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tr>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!––aqui se divide ––>
+
+      <div class="col-4 bg-light">
+        <form>
+          <div class="mb-3 row">
+            <label class="col-sm-4 text-danger">Placa</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control form-control-sm" id="placa" name="placa"
+                [(ngModel)]="carroSeleccionado.placa" />
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-4 text-danger">Marca</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control form-control-sm" id="marca" name="marca"
+                [(ngModel)]="carroSeleccionado.marca" />
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-4 text-danger">Modelo</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control form-control-sm" id="modelo" name="modelo"
+                [(ngModel)]="carroSeleccionado.modelo" />
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label class="col-sm-4 text-danger">Propietario</label>
+            <div class="col-sm-8">
+              <select class="form-select col-sm-10" id="propietario" name="propietario" [(ngModel)]="propietarioSelecionado">
+                <option [ngValue]="prop" *ngFor="let prop of arregloPropietarios ;let indice = index">
+                  {{prop.nombre}}
+                  {{prop.apellidos}}
+                </option>
+
+              </select>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-4 text-danger">Foto</label>
+            <div class="col-sm-8">
+              <div class="input-group">
+                <input type="text" id="foto" name="foto" class="form-control form-control-sm"
+                  [(ngModel)]="carroSeleccionado.nombreFoto" />
+                <button class="btn btn-primary" (click)="cajaoculta.click()">
+                  <span class="input-group"> + </span>
+                  <input type="file" #cajaoculta style="display: none" (change)="seleccionaFoto($event)" />
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-1 g-3">
+            <div class="col-3"></div>
+            <div class="col-8">
+              <img [src]="carroSeleccionado.fotoBase64" alt="Se perdio la foto"
+                onerror="this.src='../assets/img/notfound.png'" style="width: 300px; height: auto" />
+            </div>
+          </div>
+          <div *ngIf="
+            carroSeleccionado.codigo == 0;
+            then crearCarro;
+            else actualizarCarro
+          "></div>
+          <ng-template #crearCarro>
+            <div class="row g-3 mt-1 align-items-center">
+              <div class="col-3"></div>
+              <div class="col-8">
+                <div class="d-grid gap-1 col-12">
+                  <button class="btn btn-primary btn-sm" (click)="agregarCarro()">
+                    Crear Carro
+                  </button>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template #actualizarCarro>
+            <div class="row g-3 mt-1 align-items-center">
+              <div class="col-3"></div>
+              <div class="col-8">
+                <div class="d-grid gap-1 col-12">
+                  <button class="btn btn-success btn-sm" (click)="actualizarCarrito()">
+                    Actualizar Carro
+                  </button>
+                  <button class="btn btn-secondary btn-sm" (click)="resetearCarro()">
+                    Cancelar Carro
+                  </button>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </form>
+      </div>
+  </div>
+</div>
+<ng-template #ventanaEliminar>
+  <div class="modal-header bg-dark text-white" style="padding: 4px">
+    <h5 class="modal-title">
+      {{ modalTitulo }}
+    </h5>
+    <button type="button" class="btn btn-sm text-white" (click)="modalRef.hide()">
+      <span>&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>{{ modalCuerpo }} <br /> <strong>{{ modalContenido }}</strong></p>
+  </div>
+  <div class="modal-footer" style="padding: 4px;">
+    <button type="button" class="btn btn-danger btn-sm " (click)="btnBorrarCarro()">Eliminar</button>
+    <button type="button" class="btn btn-outline-danger btn-sm" (click)="btnCancelar()">Cancelar</button>
+  </div>
+</ng-template>
+
+

@@ -1,0 +1,165 @@
+<div class="card border-top col-8 mx-auto mt-5 border-info">
+
+  <div class="card-body">
+    <form #frmInfo="ngForm" novalidate>
+      <div class="row">
+        <div class="col-md-6 text-center">
+          <div class="form-group mb-2">
+            <div class="input-group">
+              <span class="input-group-text bg-second" style="width: 150px">
+                Nombres
+              </span>
+              <input
+                type="text"
+                class="form-control border-start-0"
+                id="nom"
+                name="nom"
+                required
+              />
+            </div>
+            <div class="invalid-feedbak text-left">
+              <span style="color: red">Digite sus nombres</span>
+            </div>
+          </div>
+
+          <div class="form-group mb-2">
+            <div class="input-group">
+              <span class="input-group-text bg-second" style="width: 150px">Apellidos</span>
+
+              <input
+                type="text"
+                class="form-control border-start-0"
+                id="ape"
+                name="ape"
+                required
+              />
+            </div>
+            <div class="invalid-feedbak text-left">
+              <span style="color: red">Digite sus apellidos</span>
+            </div>
+          </div>
+          <div class="form-group mb-2">
+            <div class="input-group">
+              <span class="input-group-text bg-second" style="width: 150px">TipoDocumento</span>
+
+              <select
+                class="form-select selectpicker border-start-0"
+                name="tipo"
+                id="tipo"
+                required
+              >
+                <option>
+                  acá van las opciones
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group mb-2">
+            <div class="input-group">
+              <span class="input-group-text bg-second" style="width: 150px">Documento</span>
+
+              <input
+                type="text"
+                class="form-control border-start-0"
+                id="doc"
+                name="doc"
+                required
+              />
+            </div>
+            <div class="invalid-feedbak text-left">
+              <span style="color: red">Ingrese su numero de identificacion</span>
+            </div>
+          </div>
+          <div class="form-group mb-2">
+            <div class="input-group">
+              <span class="input-group-text bg-second" style="width: 150px">Correo Electronico</span>
+
+              <input
+                type="text"
+                class="form-control border-start-0"
+                id="corr"
+                name="corr"
+                required
+                [pattern]="patronCorreo"
+              />
+            </div>
+            <div
+              class="invalid-feedbak text-left">
+              <span style="color: red">Ingrese su correo</span>
+              <span style="color: red" >Correo no valido</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 text-center">
+          <div class="text-center mb-3">
+            <img
+              [src]="'data:image/png;base64,'"
+              width="169px"
+              height="100px"
+              alt="foto_perdida"
+              position="relative"
+              class="img-thumbnail"
+              onerror="this.src='../../assets/imagenes/noDisponible.png';"
+            />
+          </div>
+          <div class="row">
+            <div class="form-group text-center mb-3">
+              <div class="input-group">
+                <span class="input-group-text">Subir Foto</span>
+
+                <input
+                  type="text"
+                  class="form-control border-start-0"
+                  id="nomFot"
+                  name="nomFot"
+                  accept="image/x-png, image/jpeg, image/gif"
+                  required
+                />
+                <button
+                  type="button"
+                  class="btn btn-info btn-sm"
+                >
+                  <span><i class="fa fa-plus" style="color: white"></i></span>
+                  <input
+                    type="file"
+                    style="display: none"
+                    id="foto_docente"
+                    name="foto_docente"
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="invalid-feedbak text-center mb-4">
+            <span style="color: red">Seleccione una Foto</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <button type="button" class="btn btn-danger">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<ng-template #spinner>
+  <div class="col-md text-center">
+    <div
+      class="spinner-border text-primary ml-auto"
+      style="width: 4rem; height: 4rem"
+      role="status"
+      aria-hidden="true"
+    ></div>
+    <div class="col-md text-center">
+      <span class="text-primary" style="font-size: 25">
+        <h2>Cargando.....</h2>
+      </span>
+    </div>
+  </div>
+</ng-template>

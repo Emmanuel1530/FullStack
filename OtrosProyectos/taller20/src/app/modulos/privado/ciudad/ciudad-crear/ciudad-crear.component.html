@@ -1,0 +1,73 @@
+<div class="container-fluid py-3">
+  <div class="card">
+    <div class="card-header input-group">
+      <h5 class="mt-3 mb-3">Agregar ciudad</h5>
+    </div>
+    <div class="row g-3">
+      <div class="col-1"></div>
+      <div class="col-10">
+        <div class="card-body">
+          <form #frmCrear="ngForm" (submit)="frmCrear.form.valid && agregarCiudad(frmCrear)">
+            <div class="form-group">
+              <div class="row g-3 mt-1">
+                <div class="col-9">
+                  <div class="input-group mb-2">
+                    <span class="input-group-text bg-second" style="width: 150px">Nombre Ciudad</span>
+
+                    <input type="text" class="form-control border-start-0" id="nom" name="nom"
+                      [(ngModel)]="ciudadSeleccionada.nombreciudad" #nom="ngModel" [ngClass]="{
+                    'is-invalid': frmCrear.submitted && nom.invalid
+                  }" required />
+                  </div>
+                  <div class="invalid-feedbak mb-1 text-danger error small" *ngIf="frmCrear.submitted && nom.invalid">
+                    <span *ngIf="nom?.errors?.required">Ingrese el nombre de la ciudad</span>
+                  </div>
+                  <div class="input-group mb-2">
+                    <span class="input-group-text bg-second" style="width: 150px">Fecha fundadacion</span>
+
+                    <input type="date" class="form-control border-start-0" id="fech" name="fech"
+                      [(ngModel)]="ciudadSeleccionada.fechafundacionciudad" #fech="ngModel" [ngClass]="{
+                    'is-invalid': frmCrear.submitted && fech.invalid
+                  }" required />
+                  </div>
+                  <div class="invalid-feedbak mb-1 text-danger error small" *ngIf="frmCrear.submitted && fech.invalid">
+                    <span *ngIf="fech?.errors?.required">Ingrese la fecha de fundacion ciudad</span>
+                  </div>
+                  <div class="input-group mb-1">
+                    <span class="input-group-text bg-second" style="width: 150px">Nombre Foto</span>
+
+                    <input type="text" class="form-control border-start-0" id="nomF" name="nomF"
+                      [(ngModel)]="ciudadSeleccionada.fotociudad.nombrepublicoimagen" #nomF="ngModel" />
+                    <button class="btn btn-outline-primary btn-sm" type="button" (click)="cajaOculta.click()">
+                      <span class="input-group"> <i class="fa fa-plus"></i></span>
+                      <input type="file" #cajaOculta style="display: none;" (change)="seleccionarFoto($event)">
+                    </button>
+                  </div>
+
+                </div>
+                <div class="col-3">
+                  <img class="img-thumbnail" style="width: 100%;"
+                    onerror="this.src='../../../assets/imagenes/noDisponible.png'"
+                    [src]="ciudadSeleccionada.fotociudad.base64" />
+                </div>
+              </div>
+              <div class="row g-3 align-items-center mt-1">
+                <div class="d-grid gap-1 col-5">
+                  <button class="btn btn-sm  btn-primary" type="submit">Crear
+                    registro</button>
+                </div>
+                <div class="d-grid gap-1 col-5">
+                  <button class="btn  btn-sm btn-outline-dark" type="button" (click)="cerrarModal()">Cancelar</button>
+                </div>
+
+
+              </div>
+            </div>
+          </form>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

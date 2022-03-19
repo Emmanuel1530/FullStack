@@ -1,0 +1,46 @@
+<div class="container-fluid">
+
+  <div class="row pt-5">
+    <div class="col-sm-5 mx-auto">
+      <div class="card shadow-lg">
+
+        <div class="card-header text-white bg-secondary">
+          <div class="d-flex align-items-center">
+            <h5 class="mx-auto w-100">Usuarios registrados</h5>
+            <i class="fa fa-key"></i>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <form #frmAcceso="ngForm" (ngSubmit)="frmAcceso.form.valid && verficarDatos(frmAcceso)">
+
+            <div class="mb-3">
+              <div class="text-danger error" *ngIf="frmAcceso.submitted && usu.invalid">
+                <span *ngIf="usu.errors?.required">Usuario requerido</span>
+                <span *ngIf="usu.errors?.pattern">Correo inválido</span>
+              </div>
+              <input type="text" class="form-control rounded-3" name="usu" placeholder="Correo electrónico"
+                [(ngModel)]="usuarioSeleccionado.correoUsuario" #usu="ngModel" required [pattern]="patronCorreo"
+                [ngClass]="{'is-invalid': frmAcceso.submitted && usu.invalid}" />
+            </div>
+
+            <div class="mb-3">
+              <div class="text-danger error" *ngIf="frmAcceso.submitted && cla.invalid">
+                <span *ngIf="cla.errors?.required">Contraseña requerida</span>
+              </div>
+              <input type="password" class="form-control rounded-3" name="cla"
+                [(ngModel)]="usuarioSeleccionado.claveUsuario" #cla="ngModel" required
+                [ngClass]="{'is-invalid': frmAcceso.submitted && cla.invalid}" />
+            </div>
+
+            <div class="d-grid mt-3 gap-2">
+              <button class="btn btn-dark" type="submit">Ingresar</button>
+              <a class="btn btn-outline-secondary" [routerLink]="['/welcome/home']">Regresar</a>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

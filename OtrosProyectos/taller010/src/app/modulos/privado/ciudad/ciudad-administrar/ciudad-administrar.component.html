@@ -1,0 +1,108 @@
+<div class="container-fluid">
+  <div class="row g-3 mt-1">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href=""><i class="fas fa-home"></i></a></li>
+          <li class="breadcrumb-item active" aria-current="page">Ciudad</li>
+          <li class="breadcrumb-item active" aria-current="page">Administrar</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-1"></div>
+    <div class="col-10 ">
+      <div class="card">
+        <div class="card-header">
+          <button type="button" class="btn  btn-outline-primary"><i
+              class="fa fa-plus"></i>&nbsp;Agregar
+          </button>
+        </div>
+        <div class="card-body">
+          <table class="table table-hover table-sm justify-content-md-center table-bordered manito">
+            <thead class="bg-dark text-white">
+              <tr>
+                <th style="width: 10%">Código</th>
+                <th style="width: 50%">Nombre ciudad</th>
+                <th style="width: 25%">Fecha fundacion</th>
+                <th style="width: 10%">&nbsp;</th>
+                <th style="width: 5%">&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody class="">
+              <tr *ngFor="let objciudad of arregloCiudades | slice:1">
+                <td>{{objciudad.codigoCiudad}}</td>
+                <td>{{objciudad.nombreCiudad}}</td>
+                <td>{{objciudad.fechaFundacionCiudad}}</td>
+
+                <td style="text-align: center">
+                  <a class="mr-1 pointer">
+                    <i class="fa fa-edit" style="color: blue; font-size: 20px"></i>
+				  </a>
+                  &nbsp;
+				  <a class="ml-1 pointer">
+                    <i class="fas fa-trash"></i>
+                  </a>
+                </td>
+                <td>
+                  <img onerror="this.src='../../assets/imagenes/noDisponible.png'" width="20px" height="20px">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="row justify-content-md-center">
+            <div class="col-md-6 text-left" style="padding-left: 15px">
+              <small><strong> total </strong> Registros encontrados en
+                <strong> xxx </strong> páginas</small>
+            </div>
+            <div class="col-md-6 text-right" style="padding-right: 15px">
+              <small>
+				controles de paginación
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #modalEliminar>
+  <div class="modal-header bg-dark text-white py-2">
+    <h5 class="modal-title ">Titulo a mostrar</h5>
+    <button type="button" class="btn btn-sm text-white">
+      <span>&times;</span>
+    </button>
+  </div>
+  <div class="modal-body bg-transparent">
+    <h5> mensaje a mostrar<br>
+      texto a mostrar
+    </h5>
+
+  </div>
+  <div class="modal-footer py-2">
+    <button class="btn btn-primary btn-sm">Eliminar</button>
+    <button class="btn btn-outline-dark btn-sm">Cancelar</button>
+  </div>
+</ng-template>
+
+<ng-template #modalAdvertencia>
+  <div class="modal-header bg-dark text-white py-2">
+    <h5 class="modal-title">Titulo a mostrar</h5>
+    <button type="button" class="btn btn-sm text-white">
+      <span>&times;</span>
+    </button>
+  </div>
+  <div class="modal-body bg-transparent">
+    <h5>Texto<br>
+      Nombre de la ciudad
+    </h5>
+  </div>
+  <div class="modal-footer py-2">
+    <button class="btn btn-outline-dark btn-sm">Cancelar</button>
+  </div>
+</ng-template>

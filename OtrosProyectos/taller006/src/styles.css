@@ -1,0 +1,8 @@
+.manito tr{
+  cursor: pointer;
+}
+
+.papeleraRoja{
+  color: red;
+  font-size: 20px;
+}

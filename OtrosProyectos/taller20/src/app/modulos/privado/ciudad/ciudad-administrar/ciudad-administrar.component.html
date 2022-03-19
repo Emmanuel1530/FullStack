@@ -1,0 +1,121 @@
+<div class="container-fluid">
+  <div class="row g-3 mt-1">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a [routerLink]="['/dash/board/root']"><i class="fas fa-home"></i></a></li>
+          <li class="breadcrumb-item active" aria-current="page">Ciudad</li>
+          <li class="breadcrumb-item active" aria-current="page">Administrar</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-1"></div>
+    <div class="col-10 ">
+      <div class="card">
+        <div class="card-header">
+          <button type="button" class="btn  btn-outline-primary" (click)="abrirModalCrear()"><i
+              class="fa fa-plus"></i>&nbsp;Agregar
+          </button>
+        </div>
+        <div class="card-body">
+          <table class="table table-hover table-sm justify-content-md-center table-bordered manito">
+            <thead class="bg-dark text-white">
+              <tr>
+                <th style="width: 10%">Código</th>
+                <th style="width: 50%">Nombre ciudad</th>
+                <th style="width: 25%">Fecha fundacion</th>
+                <th style="width: 10%">&nbsp;</th>
+                <th style="width: 5%">&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody class="">
+              <tr *ngFor="
+              let objCiudad of arregloCiudades | slice:1
+                | paginate
+                  : {
+                      id: 'paginacionCiudad',
+                      itemsPerPage: cantidadMostrar,
+                      currentPage: paginaActual,
+                      totalItems: cantidadTotalRegistros
+                    };
+              let indice = index
+            ">
+                <td style="text-align: left;">{{ objCiudad.codigociudad}}</td>
+                <td style="text-align: left">{{ objCiudad.nombreciudad }}</td>
+                <td style="text-align: left">{{ objCiudad.fechafundacionciudad }}</td>
+
+                <td style="text-align: center">
+                  <a class="mr-1 pointer">
+                    <i class="fa fa-edit" style="color: blue; font-size: 20px"
+                      (click)="abrirModalEditar(objCiudad.codigociudad)"></i></a>
+                  &nbsp; <a class="ml-1 pointer">
+                    <i class="fas fa-trash" [ngClass]="tieneEquipo(objCiudad) ?  'papeleraGris':'papeleraRoja'"
+                      (click)="tieneEquipo(objCiudad) ?  abrirModalSugerencia(modalAdvertencia,objCiudad):abrirModalEliminar(modalEliminar,objCiudad)"></i>
+                  </a>
+                </td>
+                <td>
+                  <img [src]="'data:image/png;base64,'+objCiudad.fotociudad?.base64"
+                    onerror="this.src='../../assets/imagenes/noDisponible.png'" width="20px" height="20px">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="row justify-content-md-center">
+            <div class="col-md-6 text-left" style="padding-left: 15px">
+              <small><strong>{{ cantidadTotalRegistros }}</strong> Registros encontrados en
+                <strong>{{ cantidadPaginas }}</strong> paginas</small>
+            </div>
+            <div class="col-md-6 text-right" style="padding-right: 15px">
+              <small>
+                <pagination-controls id="paginacionCiudad" (pageChange)="paginaActual = $event" [maxSize]="15"
+                  [directionLinks]="true" previousLabel="Anterior" nextLabel="Siguiente">
+                </pagination-controls>
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #modalEliminar>
+  <div class="modal-header bg-dark text-white py-2">
+    <h5 class="modal-title ">{{modalTitulo}}</h5>
+    <button type="button" class="btn btn-sm text-white" (click)="miModal.hide()">
+      <span>&times;</span>
+    </button>
+  </div>
+  <div class="modal-body bg-transparent">
+    <h5>{{modalCuerpo}}<br>
+      {{ciudadSeleccionada.nombreciudad}}
+    </h5>
+
+  </div>
+  <div class="modal-footer py-2">
+    <button class="btn btn-primary btn-sm" (click)="btnEliminar()">Eliminar</button>
+    <button class="btn btn-outline-dark btn-sm" (click)="cerrarModal()">Cancelar</button>
+  </div>
+</ng-template>
+
+<ng-template #modalAdvertencia>
+  <div class="modal-header bg-dark text-white py-2">
+    <h5 class="modal-title">{{modalTitulo}}</h5>
+    <button type="button" class="btn btn-sm text-white" (click)="miModal.hide()">
+      <span>&times;</span>
+    </button>
+  </div>
+  <div class="modal-body bg-transparent">
+    <h5>{{modalCuerpo}}<br>
+      {{ciudadSeleccionada.nombreciudad}}
+    </h5>
+  </div>
+  <div class="modal-footer py-2">
+    <button class="btn btn-outline-dark btn-sm" (click)="cerrarModal()">Cancelar</button>
+  </div>
+</ng-template>
