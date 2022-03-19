@@ -1,0 +1,92 @@
+VS:
+angular language service
+angular essentials
+angular snippets
+auto import steoates
+vscode-icons vscodeiconsteam
+
+Atom:
+angular-2-typescript-snippets gregonnet
+atom-beautyify glavin001
+atom-file-icons donovanhiland
+atom-typescript typestrong
+goto-definition faceair
+intentions steelbrain 2.1.1
+linter steelbrain 3.4.0
+linter-ui-default steelbrain 3.4.1
+platformio-ide-terminal platformio
+
+Powershell:
+get-executionpolicy
+set-executionpolicy unrestricted
+
+node -v
+tsc -v
+
+ng i -g @angular/cli
+npm i -g typescript
+ng version
+ng new tallers
+ng serve
+ng g c misComponentes/compo01
+-----------------------------------------
+npm i ajv-keywords
+npm i ajv
+npm i jquery
+npm i @popperjs/core
+npm i bootstrap
+npm i @fortawesome/fontawesome-free
+
+Librerias pro:
+
+npm i ngx-bootstrap
+npm i ngx-toastr
+npm i ngx-pagination
+npm i js-sha512
+
+ng g c components/cabecera
+ng g c components/cuerpo
+
+-----angular.json FILE------
+
+Styles:
+"node_modules/bootstrap/dist/css/bootstrap.min.css",
+"node_modules/@fortawesome/fontawesome-free/css/all.css",
+"node_modules/ngx-toastr/toastr.css",
+"src/styles.css"
+
+Scripts:
+"node_modules/jquery/dist/jquery.min.js",
+"node_modules/@popperjs/core/dist/umd/popper.min.js",
+"node_modules/bootstrap/dist/js/bootstrap.min.js"
+
+-----app.module.ts FILE-----
+import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { AppComponent } from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from './app-routing.module';
+import { NgModule } from '@angular/core';
+
+imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ModalModule.forRoot(),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    NgxPaginationModule
+  ],
+
+--APP
+Crear folder modelos y mocks
+
+
+
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+
+
